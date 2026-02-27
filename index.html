@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitTrainer Pro</title>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:Segoe UI; }
+
+body {
+  background: linear-gradient(135deg,#141e30,#243b55);
+  color:white;
+  transition:0.4s;
+}
+
+header {
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+nav a {
+  color:white;
+  text-decoration:none;
+  margin:12px;
+  font-weight:500;
+  position:relative;
+  transition:0.3s;
+}
+
+nav a::after {
+  content:"";
+  width:0%;
+  height:2px;
+  background:#00ffcc;
+  position:absolute;
+  bottom:-4px;
+  left:0;
+  transition:0.3s;
+}
+
+nav a:hover::after { width:100%; }
+
+button {
+  padding:10px 20px;
+  border:none;
+  cursor:pointer;
+  margin:10px;
+  border-radius:30px;
+  background:linear-gradient(45deg,#00ffcc,#00c3ff);
+  color:black;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+button:hover {
+  transform:scale(1.05);
+}
+
+.section {
+  display:none;
+  padding:50px;
+  animation:fade 0.6s ease;
+}
+
+.active { display:block; }
+
+.card {
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(15px);
+  padding:25px;
+  margin:20px 0;
+  border-radius:15px;
+  transition:0.4s;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+  transform:translateY(-8px);
+}
+
+input, select, textarea {
+  padding:10px;
+  margin:10px;
+  width:260px;
+  border-radius:10px;
+  border:none;
+}
+
+@keyframes fade {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+.light {
+  background:linear-gradient(135deg,#ffecd2,#fcb69f);
+  color:black;
+}
+
+.light .card {
+  background:white;
+  color:black;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>FitTrainer Pro</h2>
+  <nav>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('exercise')">Exercises</a>
+    <a onclick="showSection('bmi')">BMI</a>
+    <a onclick="showSection('contact')">Contact</a>
+  </nav>
+  <button onclick="toggleMode()">Mode</button>
+</header>
+
+<!-- HOME -->
+<div id="home" class="section active">
+  <h1>Train Smart. Build Strength.</h1>
+  <p>Professional workout guidance platform with detailed exercises.</p>
+  <button onclick="showSection('exercise')">Start Training</button>
+</div>
+
+<!-- EXERCISES -->
+<div id="exercise" class="section">
+  <h2>Select Body Part</h2>
+
+  <select onchange="showWorkout(this.value)">
+    <option value="">Select</option>
+    <option value="chest">Chest</option>
+    <option value="legs">Legs</option>
+    <option value="arms">Arms</option>
+    <option value="abs">Abs</option>
+  </select>
+
+  <div id="workoutDisplay"></div>
+
+  <button onclick="goBack()">Back</button>
+</div>
+
+<!-- BMI -->
+<div id="bmi" class="section">
+  <h2>BMI Calculator</h2>
+  <input type="number" id="height" placeholder="Height (cm)">
+  <input type="number" id="weight" placeholder="Weight (kg)">
+  <button onclick="calculateBMI()">Calculate</button>
+  <h3 id="bmiResult"></h3>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section">
+  <h2>Contact Us</h2>
+  <form onsubmit="sendMessage(event)">
+    <input type="text" required placeholder="Your Name"><br>
+    <input type="email" required placeholder="Email"><br>
+    <textarea required placeholder="Message"></textarea><br>
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+<script>
+function showSection(id){
+  document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function showWorkout(part){
+  const display = document.getElementById("workoutDisplay");
+
+  if(part==="chest"){
+    display.innerHTML = `
+    <div class="card">
+      <h3>Push-Ups</h3>
+      <p><b>Steps:</b><br>
+      1. Place hands shoulder-width apart.<br>
+      2. Keep body straight from head to heels.<br>
+      3. Lower chest slowly toward floor.<br>
+      4. Push back up without locking elbows.</p>
+      <a href="https://www.youtube.com/results?search_query=push+up+exercise" target="_blank">Watch on YouTube</a>
+    </div>
+    <div class="card">
+      <h3>Bench Press</h3>
+      <p>Lower bar slowly to mid chest and press upward while controlling breathing.</p>
+      <a href="https://www.youtube.com/results?search_query=bench+press+exercise" target="_blank">Watch on YouTube</a>
+    </div>`;
+  }
+
+  else if(part==="legs"){
+    display.innerHTML = `
+    <div class="card">
+      <h3>Squats</h3>
+      <p>Keep back straight, push hips back, lower until thighs parallel to ground.</p>
+      <a href="https://www.youtube.com/results?search_query=squat+exercise" target="_blank">Watch on YouTube</a>
+    </div>
+    <div class="card">
+      <h3>Lunges</h3>
+      <p>Step forward and lower body until knees form 90 degrees.</p>
+      <a href="https://www.youtube.com/results?search_query=lunge+exercise" target="_blank">Watch on YouTube</a>
+    </div>`;
+  }
+
+  else if(part==="arms"){
+    display.innerHTML = `
+    <div class="card">
+      <h3>Bicep Curls</h3>
+      <p>Keep elbows fixed, curl weights upward slowly.</p>
+      <a href="https://www.youtube.com/results?search_query=bicep+curls" target="_blank">Watch on YouTube</a>
+    </div>
+    <div class="card">
+      <h3>Tricep Dips</h3>
+      <p>Lower body by bending elbows then push upward.</p>
+      <a href="https://www.youtube.com/results?search_query=tricep+dips" target="_blank">Watch on YouTube</a>
+    </div>`;
+  }
+
+  else if(part==="abs"){
+    display.innerHTML = `
+    <div class="card">
+      <h3>Plank</h3>
+      <p>Keep body straight, engage core, hold for 30-60 seconds.</p>
+      <a href="https://www.youtube.com/results?search_query=plank+exercise" target="_blank">Watch on YouTube</a>
+    </div>
+    <div class="card">
+      <h3>Crunches</h3>
+      <p>Lift shoulders off ground while contracting abs.</p>
+      <a href="https://www.youtube.com/results?search_query=crunches+exercise" target="_blank">Watch on YouTube</a>
+    </div>`;
+  }
+
+  else{
+    display.innerHTML="";
+  }
+}
+
+function calculateBMI(){
+  const h = document.getElementById("height").value/100;
+  const w = document.getElementById("weight").value;
+  const bmi = (w/(h*h)).toFixed(2);
+  document.getElementById("bmiResult").innerText="Your BMI: "+bmi;
+}
+
+function sendMessage(e){
+  e.preventDefault();
+  alert("Message Sent Successfully!");
+}
+
+function toggleMode(){
+  document.body.classList.toggle("light");
+}
+
+function goBack(){
+  showSection("home");
+}
+</script>
+
+</body>
+</html>
