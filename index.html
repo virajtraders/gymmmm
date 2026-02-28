@@ -9,9 +9,11 @@
 * { margin:0; padding:0; box-sizing:border-box; font-family:Segoe UI; }
 
 body {
-  background: linear-gradient(135deg,#141e30,#243b55);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color:white;
-  transition:0.4s;
+  transition:background 0.8s ease;
 }
 
 header {
@@ -47,14 +49,35 @@ nav a:hover::after { width:100%; }
 
 button {
   padding:10px 20px;
-  border:none;
+  border:2px solid rgba(255,255,255,0.3);
   cursor:pointer;
   margin:10px;
   border-radius:30px;
-  background:linear-gradient(45deg,#00ffcc,#00c3ff);
-  color:black;
+  background:linear-gradient(135deg,#ff6b6b,#ff8787);
+  color:white;
   font-weight:bold;
   transition:0.3s;
+  box-shadow: 0 0 20px rgba(255,107,107,0.6), 0 4px 15px rgba(255,107,107,0.4);
+}
+
+button:nth-of-type(2n) {
+  background:linear-gradient(135deg,#4ecdc4,#44a08d);
+  box-shadow: 0 0 20px rgba(78,205,196,0.6), 0 4px 15px rgba(78,205,196,0.4);
+}
+
+button:nth-of-type(3n) {
+  background:linear-gradient(135deg,#ffa502,#ffb84d);
+  box-shadow: 0 0 20px rgba(255,165,2,0.6), 0 4px 15px rgba(255,165,2,0.4);
+}
+
+button:nth-of-type(4n) {
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  box-shadow: 0 0 20px rgba(102,126,234,0.6), 0 4px 15px rgba(102,126,234,0.4);
+}
+
+button:nth-of-type(5n) {
+  background:linear-gradient(135deg,#f093fb,#f5576c);
+  box-shadow: 0 0 20px rgba(240,147,251,0.6), 0 4px 15px rgba(240,147,251,0.4);
 }
 
 button:hover {
@@ -116,6 +139,8 @@ input, select, textarea {
     <a onclick="showSection('home')">Home</a>
     <a onclick="showSection('exercise')">Exercises</a>
     <a onclick="showSection('bmi')">BMI</a>
+    <a onclick="showSection('diet')">Diet</a>
+    <a onclick="showSection('routine')">Routine</a>
     <a onclick="showSection('contact')">Contact</a>
   </nav>
   <button onclick="toggleMode()">Mode</button>
@@ -154,9 +179,82 @@ input, select, textarea {
   <h3 id="bmiResult"></h3>
 </div>
 
+<!-- DIET PLAN -->
+<div id="diet" class="section">
+  <h2>Daily Diet Plan</h2>
+  <div class="card">
+    <h3>🌅 Breakfast (7:00 AM)</h3>
+    <p>Oatmeal with banana, honey, and almonds. 1 glass of milk.</p>
+  </div>
+  <div class="card">
+    <h3>🥤 Pre-Workout (9:30 AM)</h3>
+    <p>Protein shake with peanut butter and 1 apple.</p>
+  </div>
+  <div class="card">
+    <h3>🍽️ Lunch (1:00 PM)</h3>
+    <p>Grilled chicken breast, brown rice, steamed broccoli, and olive oil.</p>
+  </div>
+  <div class="card">
+    <h3>🥗 Snack (4:00 PM)</h3>
+    <p>Greek yogurt with berries and chia seeds.</p>
+  </div>
+  <div class="card">
+    <h3>🍲 Dinner (7:30 PM)</h3>
+    <p>Lean fish, sweet potato, and salad with lemon dressing.</p>
+  </div>
+  <button onclick="goBack()">Back</button>
+</div>
+
+<!-- DAILY ROUTINE -->
+<div id="routine" class="section">
+  <h2>Daily Routine Schedule</h2>
+  <div class="card">
+    <h3>⏰ 5:30 AM - Wake Up</h3>
+    <p>Wake up early, drink 500ml water, light stretching.</p>
+  </div>
+  <div class="card">
+    <h3>🏃 6:00 AM - Cardio</h3>
+    <p>30 minutes of jogging or cycling for cardio health.</p>
+  </div>
+  <div class="card">
+    <h3>🏋️ 7:00 AM - Strength Training</h3>
+    <p>Chest & Triceps / Back & Biceps / Legs & Abs (rotate)</p>
+  </div>
+  <div class="card">
+    <h3>🍴 7:45 AM - Breakfast</h3>
+    <p>Protein-rich breakfast as per diet plan.</p>
+  </div>
+  <div class="card">
+    <h3>💼 8:30 AM - 5:30 PM - Work</h3>
+    <p>Daily work/office routine with hydration breaks.</p>
+  </div>
+  <div class="card">
+    <h3>🧘 6:00 PM - Yoga/Stretching</h3>
+    <p>Cool down with yoga, stretching, and meditation.</p>
+  </div>
+  <div class="card">
+    <h3>😴 10:30 PM - Sleep</h3>
+    <p>Quality sleep for 7-8 hours for recovery.</p>
+  </div>
+  <button onclick="goBack()">Back</button>
+</div>
+
 <!-- CONTACT -->
 <div id="contact" class="section">
-  <h2>Contact Us</h2>
+  <h2>Contact Me</h2>
+  <div class="card">
+    <h3>📱 Phone Number</h3>
+    <p><a href="tel:9082593967" style="color:#ffa502; text-decoration:none; font-weight:bold;">9082593967</a></p>
+  </div>
+  <div class="card">
+    <h3>📧 Email</h3>
+    <p><a href="mailto:virajmhs@gmail.com" style="color:#4ecdc4; text-decoration:none; font-weight:bold;">virajmhs@gmail.com</a></p>
+  </div>
+  <div class="card">
+    <h3>📸 Instagram</h3>
+    <p><a href="https://instagram.com/stuff_viraj" target="_blank" style="color:#f5576c; text-decoration:none; font-weight:bold;">@stuff_viraj</a></p>
+  </div>
+  <h2 style="margin-top:40px;">Send Message</h2>
   <form onsubmit="sendMessage(event)">
     <input type="text" required placeholder="Your Name"><br>
     <input type="email" required placeholder="Email"><br>
@@ -254,6 +352,16 @@ function sendMessage(e){
 function toggleMode(){
   document.body.classList.toggle("light");
 }
+
+const backgroundImages = 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=800&fit=crop';
+
+function shuffleBackground() {
+  document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${backgroundImages}')`;
+}
+
+window.addEventListener('load', () => {
+  shuffleBackground();
+});
 
 function goBack(){
   showSection("home");
